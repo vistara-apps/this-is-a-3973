@@ -3,13 +3,33 @@
 @tailwind utilities;
 
 :root {
+  /* Light theme */
   --bg: hsl(220, 20%, 98%);
   --accent: hsl(220, 80%, 50%);
   --primary: hsl(171, 70%, 30%);
   --surface: hsl(0, 0%, 100%);
-  --dark-bg: hsl(220, 20%, 8%);
-  --dark-surface: hsl(220, 20%, 12%);
-  --dark-card: hsl(220, 20%, 16%);
+  
+  /* Dark theme - enhanced */
+  --dark-bg: hsl(220, 25%, 6%);
+  --dark-surface: hsl(220, 20%, 10%);
+  --dark-card: hsl(220, 18%, 14%);
+  --dark-border: hsl(220, 15%, 20%);
+  --dark-hover: hsl(220, 15%, 18%);
+  
+  /* Nature-inspired colors */
+  --nature-forest: hsl(171, 70%, 30%);
+  --nature-moss: hsl(171, 50%, 40%);
+  --nature-sage: hsl(171, 30%, 50%);
+  --nature-leaf: hsl(120, 40%, 45%);
+  --nature-bark: hsl(30, 25%, 35%);
+  --nature-sky: hsl(200, 70%, 60%);
+  --nature-earth: hsl(25, 30%, 25%);
+  
+  /* Status colors */
+  --success: hsl(142, 76%, 36%);
+  --warning: hsl(38, 92%, 50%);
+  --error: hsl(0, 84%, 60%);
+  --info: hsl(200, 70%, 60%);
 }
 
 body {
@@ -17,6 +37,39 @@ body {
   margin: 0;
   background: var(--dark-bg);
   color: white;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, 
+              transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--nature-forest);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nature-sage);
 }
 
 .audio-visualizer {

@@ -39,50 +39,65 @@ const Dashboard = () => {
   const recentRecordings = recordings.slice(0, 3);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-6 animate-fade-in">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+        <div className="animate-slide-up">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            🌿 Dashboard
+          </h1>
           <p className="text-slate-400 mt-1">
-            Welcome back, {user.username}! Here's your wildlife activity overview.
+            Welcome back, <span className="text-nature-forest font-medium">{user.username}</span>! 
+            Here's your wildlife activity overview.
           </p>
         </div>
-        <div className="mt-4 sm:mt-0">
+        <div className="mt-4 sm:mt-0 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <AudioRecorder />
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard
-          title="Total Recordings"
-          value={recordings.length}
-          icon={Mic}
-          trend="+12%"
-          color="emerald"
-        />
-        <StatCard
-          title="Species Identified"
-          value="24"
-          icon={Target}
-          trend="+8%"
-          color="blue"
-        />
-        <StatCard
-          title="Analysis Accuracy"
-          value="87.5%"
-          icon={Award}
-          trend="+2.1%"
-          color="purple"
-        />
-        <StatCard
-          title="Community Labels"
-          value="156"
-          icon={Users}
-          trend="+23%"
-          color="orange"
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <StatCard
+            title="Total Recordings"
+            value={recordings.length}
+            icon={Mic}
+            trend="+12%"
+            color="nature-forest"
+            description="Audio files captured"
+          />
+        </div>
+        <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <StatCard
+            title="Species Identified"
+            value="24"
+            icon={Target}
+            trend="+8%"
+            color="nature-sky"
+            description="Unique wildlife detected"
+          />
+        </div>
+        <div className="animate-slide-up" style={{ animationDelay: '0.4s' }}>
+          <StatCard
+            title="Analysis Accuracy"
+            value="87.5%"
+            icon={Award}
+            trend="+2.1%"
+            color="warning"
+            description="AI confidence score"
+          />
+        </div>
+        <div className="animate-slide-up" style={{ animationDelay: '0.5s' }}>
+          <StatCard
+            title="Community Labels"
+            value="156"
+            icon={Users}
+            trend="+23%"
+            color="info"
+            description="Crowdsourced contributions"
+          />
+        </div>
       </div>
 
       {/* Charts Row */}

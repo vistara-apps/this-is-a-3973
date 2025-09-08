@@ -28,7 +28,7 @@ const Account = () => {
       case 'profile':
         return <ProfileTab user={user} />;
       case 'subscription':
-        return <SubscriptionTab user={user} upgradeToP‭remium={upgradeToP‭remium} />;
+        return <SubscriptionTab user={user} upgradeToPremium={upgradeToPremium} />;
       case 'settings':
         return <SettingsTab />;
       case 'privacy':
@@ -152,7 +152,7 @@ const ProfileTab = ({ user }) => (
   </div>
 );
 
-const SubscriptionTab = ({ user, upgradeToP‭remium }) => (
+const SubscriptionTab = ({ user, upgradeToPremium }) => (
   <div className="space-y-6">
     {/* Current Plan */}
     <div className="bg-slate-800 rounded-lg p-6">
@@ -230,7 +230,7 @@ const SubscriptionTab = ({ user, upgradeToP‭remium }) => (
               <div className="text-slate-400 text-sm">Cancel anytime</div>
             </div>
             <button
-              onClick={upgradeToP‭remium}
+              onClick={upgradeToPremium}
               className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-colors"
             >
               Upgrade Now
