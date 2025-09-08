@@ -28,7 +28,7 @@ const Account = () => {
       case 'profile':
         return <ProfileTab user={user} />;
       case 'subscription':
-        return <SubscriptionTab user={user} upgradeToP‭remium={upgradeToP‭remium} />;
+        return <SubscriptionTab user={user} upgradeToPremium={upgradeToPremium} />;
       case 'settings':
         return <SettingsTab />;
       case 'privacy':
