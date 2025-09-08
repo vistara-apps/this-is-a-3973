@@ -21,39 +21,49 @@ const AudioRecorder = () => {
 
   if (analysisProgress > 0) {
     return (
-      <div className="bg-slate-800 rounded-lg p-4 w-full max-w-sm">
-        <div className="flex items-center space-x-3">
-          <Loader2 className="w-5 h-5 text-emerald-400 animate-spin" />
+      <div className="bg-dark-card rounded-lg p-6 w-full max-w-md animate-scale-in border border-dark-border">
+        <div className="flex items-center space-x-4">
+          <div className="relative">
+            <Loader2 className="w-6 h-6 text-nature-forest animate-spin" />
+            <div className="absolute inset-0 w-6 h-6 border-2 border-nature-forest/20 rounded-full animate-pulse" />
+          </div>
           <div className="flex-1">
-            <div className="text-sm font-medium text-white">Analyzing...</div>
-            <div className="w-full bg-slate-700 rounded-full h-2 mt-1">
+            <div className="text-sm font-medium text-white mb-2">
+              🎵 Analyzing wildlife sounds...
+            </div>
+            <div className="w-full bg-dark-surface rounded-full h-3 overflow-hidden">
               <div 
-                className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-nature-forest to-nature-moss h-3 rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${analysisProgress}%` }}
               />
             </div>
+            <div className="flex justify-between text-xs text-slate-400 mt-1">
+              <span>Processing audio patterns</span>
+              <span>{analysisProgress}%</span>
+            </div>
           </div>
-          <div className="text-sm text-slate-400">{analysisProgress}%</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col sm:flex-row gap-3">
+    <div className="flex flex-col sm:flex-row gap-4 animate-fade-in">
       {/* Record Button */}
       <button
         onClick={isRecording ? stopRecording : startRecording}
-        className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
+        className={`group relative flex items-center justify-center space-x-3 px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 focus:scale-105 shadow-lg ${
           isRecording
-            ? 'bg-red-600 hover:bg-red-700 text-white'
-            : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+            ? 'bg-gradient-to-r from-error to-red-600 hover:from-red-600 hover:to-red-700 text-white animate-recording-pulse'
+            : 'bg-gradient-to-r from-nature-forest to-nature-moss hover:from-nature-moss hover:to-nature-forest text-white'
         }`}
+        aria-label={isRecording ? 'Stop recording' : 'Start recording'}
       >
         {isRecording ? (
           <>
-            <Square className="w-4 h-4" />
-            <span>Stop Recording</span>
+            <Square className="w-5 h-5" />
+            <span className="hidden sm:inline">Stop Recording</span>
+            <span className="sm:hidden">Stop</span>
             <div className="audio-visualizer ml-2">
               <div className="audio-bar"></div>
               <div className="audio-bar"></div>
@@ -64,26 +74,45 @@ const AudioRecorder = () => {
           </>
         ) : (
           <>
-            <Mic className="w-4 h-4" />
-            <span>Record</span>
+            <div className="relative">
+              <Mic className="w-5 h-5" />
+              <div className="absolute inset-0 w-5 h-5 border-2 border-white/30 rounded-full animate-pulse group-hover:animate-ping" />
+            </div>
+            <span className="hidden sm:inline">Start Recording</span>
+            <span className="sm:hidden">Record</span>
           </>
         )}
       </button>
 
       {/* Upload Button */}
-      <label className="flex items-center space-x-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium cursor-pointer transition-colors">
+      <label className={`group flex items-center justify-center space-x-3 px-6 py-3 rounded-xl font-medium cursor-pointer transition-all duration-300 transform hover:scale-105 focus-within:scale-105 shadow-lg ${
+        isUploading 
+          ? 'bg-dark-card border-2 border-nature-sage text-nature-sage cursor-not-allowed'
+          : 'bg-dark-card hover:bg-dark-hover border-2 border-dark-border hover:border-nature-sage text-white hover:text-nature-sage'
+      }`}>
         {isUploading ? (
-          <Loader2 className="w-4 h-4 animate-spin" />
+          <>
+            <Loader2 className="w-5 h-5 animate-spin" />
+            <span className="hidden sm:inline">Uploading...</span>
+            <span className="sm:hidden">Upload</span>
+          </>
         ) : (
-          <Upload className="w-4 h-4" />
+          <>
+            <div className="relative">
+              <Upload className="w-5 h-5" />
+              <div className="absolute inset-0 w-5 h-5 border-2 border-current opacity-30 rounded-full group-hover:animate-pulse" />
+            </div>
+            <span className="hidden sm:inline">Upload Audio</span>
+            <span className="sm:hidden">Upload</span>
+          </>
         )}
-        <span>Upload</span>
         <input
           type="file"
           accept="audio/*"
           onChange={handleFileUpload}
           className="hidden"
           disabled={isUploading}
+          aria-label="Upload audio file"
         />
       </label>
     </div>
